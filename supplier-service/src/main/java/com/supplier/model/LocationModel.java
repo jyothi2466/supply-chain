@@ -2,35 +2,44 @@ package com.supplier.model;
 
 import java.io.Serializable;
 
-import com.supplier.entity.Address;
-import com.supplier.entity.Warehouse;
+import javax.validation.constraints.NotNull;
 
-public class LocationModel implements Serializable{
+public class LocationModel implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4123375607486138703L;
 
-	private String locationId;
+	@NotNull(message = "should not be null")
+	private String locationGuid;
 
+	@NotNull(message = "should not be null")
 	private String area;
 
+	@NotNull(message = "should not be null")
 	private String locationCode;
 
-	private Address address;
-
-	private Warehouse warehouse;
+	@NotNull(message = "should not be null")
+	private AddressModel addressModel;
 
 	public LocationModel() {
 	}
 
-	public String getLocationId() {
-		return locationId;
+	public String getLocationGuid() {
+		return locationGuid;
 	}
 
-	public void setLocationId(String locationId) {
-		this.locationId = locationId;
+	public void setLocationGuid(String locationGuid) {
+		this.locationGuid = locationGuid;
+	}
+
+	public AddressModel getAddressModel() {
+		return addressModel;
+	}
+
+	public void setAddressModel(AddressModel addressModel) {
+		this.addressModel = addressModel;
 	}
 
 	public String getArea() {
@@ -47,22 +56,6 @@ public class LocationModel implements Serializable{
 
 	public void setLocationCode(String locationCode) {
 		this.locationCode = locationCode;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public Warehouse getWarehouse() {
-		return warehouse;
-	}
-
-	public void setWarehouse(Warehouse warehouse) {
-		this.warehouse = warehouse;
 	}
 
 }

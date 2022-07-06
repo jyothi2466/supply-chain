@@ -3,8 +3,6 @@ package com.supplier.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.supplier.entity.WarehouseProduct;
-
 public class OfferModel implements Serializable {
 
 	/**
@@ -22,7 +20,7 @@ public class OfferModel implements Serializable {
 
 	private Date startDate;
 
-	private WarehouseProduct warehouseProduct;
+	private WarehouseProductModel warehouseProductModel;
 
 	public OfferModel() {
 
@@ -68,12 +66,12 @@ public class OfferModel implements Serializable {
 		this.startDate = startDate;
 	}
 
-	public WarehouseProduct getWarehouseProduct() {
-		return warehouseProduct;
+	public WarehouseProductModel getWarehouseProductModel() {
+		return warehouseProductModel;
 	}
 
-	public void setWarehouseProduct(WarehouseProduct warehouseProduct) {
-		this.warehouseProduct = warehouseProduct;
+	public void setWarehouseProductModel(WarehouseProductModel warehouseProductModel) {
+		this.warehouseProductModel = warehouseProductModel;
 	}
 
 }

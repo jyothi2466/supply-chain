@@ -1,11 +1,8 @@
 package com.supplier.model;
 
 import java.io.Serializable;
-import java.util.List;
 
-import com.supplier.entity.Contact;
-
-public class ContactTypeModel implements Serializable{
+public class ContactTypeModel implements Serializable {
 
 	/**
 	 * 
@@ -15,8 +12,6 @@ public class ContactTypeModel implements Serializable{
 	private Integer contactTypeId;
 
 	private String name;
-
-	private List<Contact> contacts;
 
 	public ContactTypeModel() {
 
@@ -36,14 +31,6 @@ public class ContactTypeModel implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public List<Contact> getContacts() {
-		return contacts;
-	}
-
-	public void setContacts(List<Contact> contacts) {
-		this.contacts = contacts;
 	}
 
 }

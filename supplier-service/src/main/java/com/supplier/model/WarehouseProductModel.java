@@ -4,10 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.supplier.entity.Inventory;
-import com.supplier.entity.Offer;
-import com.supplier.entity.StockLevel;
-
 public class WarehouseProductModel implements Serializable {
 
 	/**
@@ -15,7 +11,7 @@ public class WarehouseProductModel implements Serializable {
 	 */
 	private static final long serialVersionUID = -5115925885281074179L;
 
-	private String wpId;
+	private String wpGuid;
 
 	private Long availableQuantity;
 
@@ -33,23 +29,14 @@ public class WarehouseProductModel implements Serializable {
 
 	private String warehouseId;
 
-	private List<Inventory> inventories;
+	private List<InventoryModel> inventoryModels;
 
-	private List<Offer> offers;
+	private List<OfferModel> offerModels;
 
-	@SuppressWarnings("rawtypes")
-	private List<StockLevel> stockLevels;
+	private List<StockLevelModel> stockLevelModels;
 
 	public WarehouseProductModel() {
 
-	}
-
-	public String getWpId() {
-		return wpId;
-	}
-
-	public void setWpId(String wpId) {
-		this.wpId = wpId;
 	}
 
 	public Long getAvailableQuantity() {
@@ -116,30 +103,36 @@ public class WarehouseProductModel implements Serializable {
 		this.warehouseId = warehouseId;
 	}
 
-	public List<Inventory> getInventories() {
-		return inventories;
+	public String getWpGuid() {
+		return wpGuid;
 	}
 
-	public void setInventories(List<Inventory> inventories) {
-		this.inventories = inventories;
+	public void setWpGuid(String wpGuid) {
+		this.wpGuid = wpGuid;
 	}
 
-	public List<Offer> getOffers() {
-		return offers;
+	public List<InventoryModel> getInventoryModels() {
+		return inventoryModels;
 	}
 
-	public void setOffers(List<Offer> offers) {
-		this.offers = offers;
+	public void setInventoryModels(List<InventoryModel> inventoryModels) {
+		this.inventoryModels = inventoryModels;
 	}
 
-	@SuppressWarnings("rawtypes")
-	public List<StockLevel> getStockLevels() {
-		return stockLevels;
+	public List<OfferModel> getOfferModels() {
+		return offerModels;
 	}
 
-	@SuppressWarnings("rawtypes")
-	public void setStockLevels(List<StockLevel> stockLevels) {
-		this.stockLevels = stockLevels;
+	public void setOfferModels(List<OfferModel> offerModels) {
+		this.offerModels = offerModels;
+	}
+
+	public List<StockLevelModel> getStockLevelModels() {
+		return stockLevelModels;
+	}
+
+	public void setStockLevelModels(List<StockLevelModel> stockLevelModels) {
+		this.stockLevelModels = stockLevelModels;
 	}
 
 }

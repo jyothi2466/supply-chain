@@ -1,7 +1,6 @@
 package com.supplier.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -17,7 +15,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="contact",schema="supplier_schema")
+@Table(name = "contact", schema = "supplier_schema")
 @NamedQuery(name = "Contact.findAll", query = "SELECT c FROM Contact c")
 public class Contact implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -28,14 +26,15 @@ public class Contact implements Serializable {
 
 	private String value;
 
-	// bi-directional many-to-one association to ContactType
+	// uni-directional many-to-one association to ContactType
 	@ManyToOne
 	@JoinColumn(name = "contact_type_id")
 	private ContactType contactType;
 
 	// bi-directional many-to-one association to Warehouse
-	@OneToMany(mappedBy = "contact")
-	private List<Warehouse> warehouses;
+	@ManyToOne
+	@JoinColumn(name = "warehouse_guid")
+	private Warehouse warehouse;
 
 	public Contact() {
 	}
@@ -64,26 +63,12 @@ public class Contact implements Serializable {
 		this.contactType = contactType;
 	}
 
-	public List<Warehouse> getWarehouses() {
-		return this.warehouses;
-	}
-
-	public void setWarehouses(List<Warehouse> warehouses) {
-		this.warehouses = warehouses;
-	}
-
-	public Warehouse addWarehous(Warehouse warehouse) {
-		getWarehouses().add(warehouse);
-		warehouse.setContact(this);
-
+	public Warehouse getWarehouse() {
 		return warehouse;
 	}
 
-	public Warehouse removeWarehous(Warehouse warehouse) {
-		getWarehouses().remove(warehouse);
-		warehouse.setContact(null);
-
-		return warehouse;
+	public void setWarehouse(Warehouse warehouse) {
+		this.warehouse = warehouse;
 	}
 
 }

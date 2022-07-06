@@ -1,13 +1,11 @@
 package com.supplier.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -15,7 +13,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="address",schema="supplier_schema")
+@Table(name = "address", schema = "supplier_schema")
 @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")
 public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -38,10 +36,6 @@ public class Address implements Serializable {
 	private String postalCode;
 
 	private String state;
-
-	// bi-directional many-to-one association to Location
-	@OneToMany(mappedBy = "address")
-	private List<Location> locations;
 
 	public Address() {
 	}
@@ -102,26 +96,11 @@ public class Address implements Serializable {
 		this.state = state;
 	}
 
-	public List<Location> getLocations() {
-		return this.locations;
-	}
-
-	public void setLocations(List<Location> locations) {
-		this.locations = locations;
-	}
-
-	public Location addLocation(Location location) {
-		getLocations().add(location);
-		location.setAddress(this);
-
-		return location;
-	}
-
-	public Location removeLocation(Location location) {
-		getLocations().remove(location);
-		location.setAddress(null);
-
-		return location;
+	@Override
+	public String toString() {
+		return "Address [addressGuid=" + addressGuid + ", addressLine1=" + addressLine1 + ", addressLine2="
+				+ addressLine2 + ", city=" + city + ", country=" + country + ", postalCode=" + postalCode + ", state="
+				+ state + "]";
 	}
 
 }

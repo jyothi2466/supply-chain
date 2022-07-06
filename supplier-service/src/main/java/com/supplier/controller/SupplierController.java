@@ -15,15 +15,14 @@ import com.supplier.model.SupplierModel;
 import com.supplier.service.SupplierService;
 
 @RestController
-@RequestMapping("api/supplier/v1")
+@RequestMapping("/api/supplier/v1")
 public class SupplierController {
 
 	@Autowired
-	public SupplierService supplierService;
+	private SupplierService supplierService;
 
 	@PostMapping("/create")
-	public SupplierModel createSupplier(@Validated @RequestBody SupplierModel supplierModel) {
-		Optional<SupplierModel> optionalSupplierModel = Optional.ofNullable(supplierModel);
+	public SupplierModel createSupplier(@Validated @RequestBody Optional<SupplierModel> optionalSupplierModel) {
 		return supplierService.createSupplier(optionalSupplierModel);
 	}
 

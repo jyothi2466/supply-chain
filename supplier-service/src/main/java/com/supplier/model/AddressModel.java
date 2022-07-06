@@ -1,9 +1,8 @@
 package com.supplier.model;
 
 import java.io.Serializable;
-import java.util.List;
 
-import com.supplier.entity.Location;
+import javax.validation.constraints.NotNull;
 
 public class AddressModel implements Serializable {
 
@@ -12,32 +11,41 @@ public class AddressModel implements Serializable {
 	 */
 	private static final long serialVersionUID = -2888079326440057175L;
 
-	private String addressId;
+	@NotNull(message = "should not be null")
+	private String addressGuid;
 
+	@NotNull(message = "should not be null")
 	private String addressLine1;
 
+	@NotNull(message = "should not be null")
 	private String addressLine2;
 
+	@NotNull(message = "should not be null")
 	private String city;
 
+	@NotNull(message = "should not be null")
 	private String country;
 
+	@NotNull(message = "should not be null")
 	private String postalCode;
 
+	@NotNull(message = "should not be null")
 	private String state;
 
-	private List<Location> locations;
+	/*
+	 * @NotNull(message = "should not be null") private LocationModel locationModel;
+	 */
 
 	public AddressModel() {
 
 	}
 
-	public String getAddressId() {
-		return addressId;
+	public String getAddressGuid() {
+		return addressGuid;
 	}
 
-	public void setAddressId(String addressId) {
-		this.addressId = addressId;
+	public void setAddressGuid(String addressGuid) {
+		this.addressGuid = addressGuid;
 	}
 
 	public String getAddressLine1() {
@@ -88,12 +96,11 @@ public class AddressModel implements Serializable {
 		this.state = state;
 	}
 
-	public List<Location> getLocations() {
-		return locations;
-	}
-
-	public void setLocations(List<Location> locations) {
-		this.locations = locations;
-	}
+	/*
+	 * public LocationModel getLocationModel() { return locationModel; }
+	 * 
+	 * public void setLocationModel(LocationModel locationModel) {
+	 * this.locationModel = locationModel; }
+	 */
 
 }

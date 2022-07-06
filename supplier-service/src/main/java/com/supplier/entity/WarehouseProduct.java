@@ -62,7 +62,8 @@ public class WarehouseProduct implements Serializable {
 	private List<Offer> offers;
 
 	// bi-directional many-to-one association to StockLevel
-	@OneToMany(mappedBy = "warehouseProduct")
+	@SuppressWarnings("rawtypes")
+	@OneToMany(mappedBy = "warehouseProduct")	
 	private List<StockLevel> stockLevels;
 
 	public WarehouseProduct() {
@@ -184,22 +185,23 @@ public class WarehouseProduct implements Serializable {
 		return offer;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List<StockLevel> getStockLevels() {
 		return this.stockLevels;
 	}
 
-	public void setStockLevels(List<StockLevel> stockLevels) {
+	public void setStockLevels(@SuppressWarnings("rawtypes") List<StockLevel> stockLevels) {
 		this.stockLevels = stockLevels;
 	}
 
-	public StockLevel addStockLevel(StockLevel stockLevel) {
+	public StockLevel<?> addStockLevel(StockLevel<?> stockLevel) {
 		getStockLevels().add(stockLevel);
 		stockLevel.setWarehouseProduct(this);
 
 		return stockLevel;
 	}
 
-	public StockLevel removeStockLevel(StockLevel stockLevel) {
+	public StockLevel<?> removeStockLevel(StockLevel<?> stockLevel) {
 		getStockLevels().remove(stockLevel);
 		stockLevel.setWarehouseProduct(null);
 

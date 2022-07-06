@@ -2,8 +2,6 @@ package com.supplier.model;
 
 import java.io.Serializable;
 
-import com.supplier.entity.WarehouseProduct;
-
 public class StockLevelModel implements Serializable {
 
 	/**
@@ -11,7 +9,7 @@ public class StockLevelModel implements Serializable {
 	 */
 	private static final long serialVersionUID = -2528617618703983811L;
 
-	private String stockLevelId;
+	private String stockLevelGuid;
 
 	private Long bufferStock;
 
@@ -19,18 +17,26 @@ public class StockLevelModel implements Serializable {
 
 	private Long reorderStock;
 
-	private WarehouseProduct warehouseProduct;
+	private WarehouseProductModel warehouseProductModel;
 
 	public StockLevelModel() {
 
 	}
 
-	public String getStockLevelId() {
-		return stockLevelId;
+	public String getStockLevelGuid() {
+		return stockLevelGuid;
 	}
 
-	public void setStockLevelId(String stockLevelId) {
-		this.stockLevelId = stockLevelId;
+	public void setStockLevelGuid(String stockLevelGuid) {
+		this.stockLevelGuid = stockLevelGuid;
+	}
+
+	public WarehouseProductModel getWarehouseProductModel() {
+		return warehouseProductModel;
+	}
+
+	public void setWarehouseProductModel(WarehouseProductModel warehouseProductModel) {
+		this.warehouseProductModel = warehouseProductModel;
 	}
 
 	public Long getBufferStock() {
@@ -55,14 +61,6 @@ public class StockLevelModel implements Serializable {
 
 	public void setReorderStock(Long reorderStock) {
 		this.reorderStock = reorderStock;
-	}
-
-	public WarehouseProduct getWarehouseProduct() {
-		return warehouseProduct;
-	}
-
-	public void setWarehouseProduct(WarehouseProduct warehouseProduct) {
-		this.warehouseProduct = warehouseProduct;
 	}
 
 }

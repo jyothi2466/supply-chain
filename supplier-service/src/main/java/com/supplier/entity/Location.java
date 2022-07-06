@@ -1,15 +1,15 @@
 package com.supplier.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="location",schema="supplier_schema")
+@Table(name = "location", schema = "supplier_schema")
 @NamedQuery(name = "Location.findAll", query = "SELECT l FROM Location l")
 public class Location implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -31,14 +31,10 @@ public class Location implements Serializable {
 	@Column(name = "location_code")
 	private String locationCode;
 
-	// bi-directional many-to-one association to Address
-	@ManyToOne
+	// uni-directional one-to-one association to Address
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "address_guid")
 	private Address address;
-
-	// bi-directional many-to-one association to Warehouse
-	@OneToMany(mappedBy = "location")
-	private List<Warehouse> warehouses;
 
 	public Location() {
 	}
@@ -75,26 +71,10 @@ public class Location implements Serializable {
 		this.address = address;
 	}
 
-	public List<Warehouse> getWarehouses() {
-		return this.warehouses;
-	}
-
-	public void setWarehouses(List<Warehouse> warehouses) {
-		this.warehouses = warehouses;
-	}
-
-	public Warehouse addWarehous(Warehouse warehouse) {
-		getWarehouses().add(warehouse);
-		warehouse.setLocation(this);
-
-		return warehouse;
-	}
-
-	public Warehouse removeWarehous(Warehouse warehouse) {
-		getWarehouses().remove(warehouse);
-		warehouse.setLocation(null);
-
-		return warehouse;
+	@Override
+	public String toString() {
+		return "Location [locationGuid=" + locationGuid + ", area=" + area + ", locationCode=" + locationCode
+				+ ", address=" + address + "]";
 	}
 
 }

@@ -3,8 +3,6 @@ package com.supplier.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.supplier.entity.WarehouseProduct;
-
 public class InventoryModel implements Serializable {
 
 	/**
@@ -12,7 +10,7 @@ public class InventoryModel implements Serializable {
 	 */
 	private static final long serialVersionUID = -8713827580514837524L;
 
-	private String inventoryId;
+	private String inventoryGuid;
 
 	private Date inventoryDate;
 
@@ -22,18 +20,18 @@ public class InventoryModel implements Serializable {
 
 	private Integer totalUnits;
 
-	private WarehouseProduct warehouseProduct;
+	private WarehouseProductModel warehouseProductModel;
 
 	public InventoryModel() {
 
 	}
 
-	public String getInventoryId() {
-		return inventoryId;
+	public String getInventoryGuid() {
+		return inventoryGuid;
 	}
 
-	public void setInventoryId(String inventoryId) {
-		this.inventoryId = inventoryId;
+	public void setInventoryGuid(String inventoryGuid) {
+		this.inventoryGuid = inventoryGuid;
 	}
 
 	public Date getInventoryDate() {
@@ -68,12 +66,12 @@ public class InventoryModel implements Serializable {
 		this.totalUnits = totalUnits;
 	}
 
-	public WarehouseProduct getWarehouseProduct() {
-		return warehouseProduct;
+	public WarehouseProductModel getWarehouseProductModel() {
+		return warehouseProductModel;
 	}
 
-	public void setWarehouseProduct(WarehouseProduct warehouseProduct) {
-		this.warehouseProduct = warehouseProduct;
+	public void setWarehouseProductModel(WarehouseProductModel warehouseProductModel) {
+		this.warehouseProductModel = warehouseProductModel;
 	}
 
 }

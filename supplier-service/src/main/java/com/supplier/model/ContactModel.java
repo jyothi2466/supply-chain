@@ -1,36 +1,40 @@
 package com.supplier.model;
 
 import java.io.Serializable;
-import java.util.List;
 
-import com.supplier.entity.ContactType;
-import com.supplier.entity.Warehouse;
+import javax.validation.constraints.NotNull;
 
-public class ContactModel implements Serializable{
+public class ContactModel implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5196942917373179267L;
 
-	private String contactId;
+	@NotNull(message = "should not be null")
+	private String contactGuid;
 
+	@NotNull(message = "should not be null")
 	private String value;
 
-	private ContactType contactType;
+	@NotNull(message = "should not be null")
+	private int contactTypeId;
 
-	private List<Warehouse> warehouses;
+	/*
+	 * @NotNull(message = "should not be null") private WarehouseModel
+	 * warehouseModel
+	 */;
 
 	public ContactModel() {
 
 	}
 
-	public String getContactId() {
-		return contactId;
+	public String getContactGuid() {
+		return contactGuid;
 	}
 
-	public void setContactId(String contactId) {
-		this.contactId = contactId;
+	public void setContactGuid(String contactGuid) {
+		this.contactGuid = contactGuid;
 	}
 
 	public String getValue() {
@@ -41,20 +45,25 @@ public class ContactModel implements Serializable{
 		this.value = value;
 	}
 
-	public ContactType getContactType() {
-		return contactType;
+	/**
+	 * @return the contactTypeId
+	 */
+	public int getContactTypeId() {
+		return contactTypeId;
 	}
 
-	public void setContactType(ContactType contactType) {
-		this.contactType = contactType;
+	/**
+	 * @param contactTypeId the contactTypeId to set
+	 */
+	public void setContactTypeId(int contactTypeId) {
+		this.contactTypeId = contactTypeId;
 	}
 
-	public List<Warehouse> getWarehouses() {
-		return warehouses;
-	}
-
-	public void setWarehouses(List<Warehouse> warehouses) {
-		this.warehouses = warehouses;
-	}
+	/*
+	 * public WarehouseModel getWarehouseModel() { return warehouseModel; }
+	 * 
+	 * public void setWarehouseModel(WarehouseModel warehouseModel) {
+	 * this.warehouseModel = warehouseModel; }
+	 */
 
 }

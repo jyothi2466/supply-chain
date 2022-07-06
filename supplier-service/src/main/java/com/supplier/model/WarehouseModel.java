@@ -1,26 +1,35 @@
 package com.supplier.model;
 
 import java.io.Serializable;
+import java.util.List;
 
-import com.supplier.entity.Contact;
-import com.supplier.entity.Location;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-public class WarehouseModel implements Serializable{
+public class WarehouseModel implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2924903407885671750L;
 
+	@NotNull(message = "should not be null")
 	private String warehouseGuid;
 
+	@NotBlank(message = "Name should not be null")
 	private String name;
 
+	@NotNull(message = "Mandantory")
 	private String warehouseCode;
 
-	private Contact contact;
+	@NotNull(message = "should not be null")
+	private List<ContactModel> contactModels;
 
-	private Location location;
+	@NotNull(message = "should not be null")
+	private LocationModel locationModel;
+
+	@NotNull(message = "should not be null")
+	private String supplierGuid;
 
 	public WarehouseModel() {
 
@@ -50,20 +59,46 @@ public class WarehouseModel implements Serializable{
 		this.warehouseCode = warehouseCode;
 	}
 
-	public Contact getContact() {
-		return contact;
+	public List<ContactModel> getContactModels() {
+		return contactModels;
 	}
 
-	public void setContact(Contact contact) {
-		this.contact = contact;
+	public void setContactModels(List<ContactModel> contactModels) {
+		this.contactModels = contactModels;
 	}
 
-	public Location getLocation() {
-		return location;
+	public LocationModel getLocationModel() {
+		return locationModel;
 	}
 
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setLocationModel(LocationModel locationModel) {
+		this.locationModel = locationModel;
+	}
+
+	
+
+	/**
+	 * @return the supplierGuid
+	 */
+	public String getSupplierGuid() {
+		return supplierGuid;
+	}
+
+	/**
+	 * @param supplierGuid the supplierGuid to set
+	 */
+	public void setSupplierGuid(String supplierGuid) {
+		this.supplierGuid = supplierGuid;
+	}
+
+	@Override
+	public String toString() {
+		return "WarehouseModel [warehouseGuid=" + warehouseGuid + ", name=" + name + ", warehouseCode=" + warehouseCode
+				+ ", contactModels=" + contactModels + ", locationModel=" + locationModel + ", getWarehouseGuid()="
+				+ getWarehouseGuid() + ", getName()=" + getName() + ", getWarehouseCode()=" + getWarehouseCode()
+				+ ", getContactModels()=" + getContactModels() + ", getLocationModel()=" + getLocationModel()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 }
