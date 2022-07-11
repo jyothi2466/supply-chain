@@ -1,18 +1,11 @@
 package com.supplychain.order.model;
 
-import java.io.Serializable;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-public class LineItemModel implements Serializable {
+public class LineItemModel {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8289194613630646984L;
-
+	
 	@NotNull(message = "Line Item Guid should not be null")
 	private String lineItemGuid;
 
@@ -23,7 +16,7 @@ public class LineItemModel implements Serializable {
 	private String productCode;
 
 	@NotNull
-	@NotEmpty(message = "Quantity should not be null or empty")
+//	@NotEmpty(message = "Quantity should not be null or empty")
 	private Integer quantity;
 
 	private double totalPrice;

@@ -9,5 +9,7 @@ public interface OrderService {
 	public OrderModel createOrder(Optional<OrderModel> orderModel);
 	
 	public OrderModel findOrderByGuid(String orderGuid);
+	
+	public OrderModel updateOrder(Optional<OrderModel> orderModel);
 
 }

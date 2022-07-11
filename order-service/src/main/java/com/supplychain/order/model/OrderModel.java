@@ -44,10 +44,9 @@ public class OrderModel implements Serializable {
 
 	@NotNull(message = "Number of days in transit should not be null")
 	private Integer transitDays;
-
-	@Valid
+	
 	@NotNull(message = "Line Items should not be null")
-	private List<LineItemModel> lineItemModels;
+	private List<@Valid LineItemModel> lineItemModels;
 
 	private List<OrderStoreSupplierModel> orderStoreSupplierModels;
 

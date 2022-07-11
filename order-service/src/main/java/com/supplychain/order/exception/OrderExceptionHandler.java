@@ -3,6 +3,8 @@ package com.supplychain.order.exception;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +33,16 @@ public class OrderExceptionHandler extends ResponseEntityExceptionHandler {
 		// returning the response rather than controller.
 		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponse> handleConstraintViolationException(ConstraintViolationException exception) {
+    	ErrorResponse error = new ErrorResponse();
+    	error.setStatusCode(HttpStatus.BAD_REQUEST.toString());
+        error.setStatus(exception.getMessage());
+        //error.setDetails(new ArrayList().add(exception.getConstraintViolations());
+        return ResponseEntity.badRequest().body(error);
+    }
+
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	// As we are using validators in model, when we get a bad request from client.
