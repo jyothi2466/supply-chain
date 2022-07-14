@@ -7,5 +7,7 @@ import com.supplychain.order.entities.Order;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, String> {
+	
+	public Order findByCreatedBy(String createdBy);
 
 }

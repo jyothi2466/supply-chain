@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.supplychain.order.entities.History;
 import com.supplychain.order.entities.LineItem;
 import com.supplychain.order.entities.Order;
 import com.supplychain.order.entities.OrderStoreSupplier;
@@ -12,6 +13,7 @@ import com.supplychain.order.entities.PaymentMethod;
 import com.supplychain.order.entities.Status;
 import com.supplychain.order.exception.OrderNotFoundException;
 import com.supplychain.order.mapper.OrderMapper;
+import com.supplychain.order.model.HistoryModel;
 import com.supplychain.order.model.LineItemModel;
 import com.supplychain.order.model.OrderModel;
 import com.supplychain.order.model.OrderStoreSupplierModel;
@@ -21,15 +23,16 @@ public class OrderUtil {
 	static public Order mapOrderModelToOrder(Optional<OrderModel> optionalOrderModel, OrderMapper orderMapper) {
 
 		OrderModel orderModel = optionalOrderModel
-				.orElseThrow(() -> new OrderNotFoundException("Order details are not found"));
+				.orElseThrow(() -> new OrderNotFoundException(OrderConstants.orderErrorMessage));
 
 		orderModel.setOrderGuid(UUID.randomUUID().toString());
 
 		Order order = orderMapper.modelToOrder(orderModel);
 
 		List<LineItem> lineItemsList = optionalOrderModel.map(OrderModel::getLineItemModels)
-				.orElseThrow(() -> new OrderNotFoundException("LineItem details are not found")).stream()
-				.map(lineItemModel -> mapModelToLineItem(lineItemModel, orderMapper,order)).collect(Collectors.toList());
+				.orElseThrow(() -> new OrderNotFoundException(OrderConstants.lineItemErrorMessage)).stream()
+				.map(lineItemModel -> mapModelToLineItem(lineItemModel, orderMapper, order))
+				.collect(Collectors.toList());
 
 		order.setLineItems(lineItemsList);
 
@@ -39,12 +42,17 @@ public class OrderUtil {
 
 		List<OrderStoreSupplier> orderStoreSupplierList = optionalOrderModel
 				.map(OrderModel::getOrderStoreSupplierModels)
-				.orElseThrow(() -> new OrderNotFoundException("Order Store Supplier Details are not found")).stream()
-				.map(orderStoreModel -> mapModelToOrderStoreSupplier(orderStoreModel, orderMapper,order))
+				.orElseThrow(() -> new OrderNotFoundException(OrderConstants.orderStoreSupplierMessage)).stream()
+				.map(orderStoreModel -> mapModelToOrderStoreSupplier(orderStoreModel, orderMapper, order))
 				.collect(Collectors.toList());
 
 		order.setOrderStoreSuppliers(orderStoreSupplierList);
 
+		List<History> historyList = optionalOrderModel.map(OrderModel::getHistoryModels)
+				.orElseThrow(() -> new OrderNotFoundException(OrderConstants.historyErrorMessage)).stream()
+				.map(historyModel -> mapModelToHistory(historyModel, orderMapper, order)).collect(Collectors.toList());
+
+		order.setHistories(historyList);
 		Status status = new Status();
 		status.setStatusId(orderModel.getStatusId());
 		order.setStatus(status);
@@ -60,10 +68,17 @@ public class OrderUtil {
 	}
 
 	static public OrderStoreSupplier mapModelToOrderStoreSupplier(OrderStoreSupplierModel orderSSModel,
-			OrderMapper orderMapper,Order order) {
+			OrderMapper orderMapper, Order order) {
 		orderSSModel.setOssGuid(UUID.randomUUID().toString());
 		OrderStoreSupplier orderStoreSupplier = orderMapper.modelToOrderStoreSupplier(orderSSModel);
 		orderStoreSupplier.setOrder(order);
 		return orderStoreSupplier;
+	}
+
+	static public History mapModelToHistory(HistoryModel historyModel, OrderMapper orderMapper, Order order) {
+		historyModel.setHistoryGuid(UUID.randomUUID().toString());
+		History history = orderMapper.modelToHistory(historyModel);
+		history.setOrder(order);
+		return history;
 	}
 }

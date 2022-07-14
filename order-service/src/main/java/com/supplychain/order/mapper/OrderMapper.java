@@ -2,9 +2,11 @@ package com.supplychain.order.mapper;
 
 import org.mapstruct.Mapper;
 
+import com.supplychain.order.entities.History;
 import com.supplychain.order.entities.LineItem;
 import com.supplychain.order.entities.Order;
 import com.supplychain.order.entities.OrderStoreSupplier;
+import com.supplychain.order.model.HistoryModel;
 import com.supplychain.order.model.LineItemModel;
 import com.supplychain.order.model.OrderModel;
 import com.supplychain.order.model.OrderStoreSupplierModel;
@@ -23,4 +25,8 @@ public interface OrderMapper {
 	public OrderStoreSupplier modelToOrderStoreSupplier(OrderStoreSupplierModel orderStoreSupplierModel);
 
 	public OrderStoreSupplierModel orderStoreSupplierToModel(OrderStoreSupplier orderStoreSupplier);
+	
+	public History modelToHistory(HistoryModel historyModel);
+	
+	public HistoryModel historyToModel(History history);
 }

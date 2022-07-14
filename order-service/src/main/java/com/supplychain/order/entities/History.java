@@ -1,34 +1,43 @@
 package com.supplychain.order.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the history database table.
  * 
  */
 @Entity
-@Table(name="history",schema="order_schema")
-@NamedQuery(name="History.findAll", query="SELECT h FROM History h")
+@Table(name = "history", schema = "order_schema")
+@NamedQuery(name = "History.findAll", query = "SELECT h FROM History h")
 public class History implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="history_guid")
+	@Column(name = "history_guid")
 	private String historyGuid;
-
-	@Column(name="order_guid")
-	private String orderGuid;
 
 	private String remarks;
 
-	@Column(name="updated_by")
+	@Column(name = "updated_by")
 	private String updatedBy;
 
-	@Column(name="updated_date")
+	@Column(name = "updated_date")
 	private Timestamp updatedDate;
+
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@JoinColumn(name = "order_guid")
+	private Order order;
 
 	public History() {
 	}
@@ -39,14 +48,6 @@ public class History implements Serializable {
 
 	public void setHistoryGuid(String historyGuid) {
 		this.historyGuid = historyGuid;
-	}
-
-	public String getOrderGuid() {
-		return this.orderGuid;
-	}
-
-	public void setOrderGuid(String orderGuid) {
-		this.orderGuid = orderGuid;
 	}
 
 	public String getRemarks() {
@@ -71,6 +72,14 @@ public class History implements Serializable {
 
 	public void setUpdatedDate(Timestamp updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 }

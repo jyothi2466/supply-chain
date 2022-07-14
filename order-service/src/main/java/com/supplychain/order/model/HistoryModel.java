@@ -7,8 +7,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class HistoryModel implements Serializable{
-	
+public class HistoryModel implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -16,9 +16,6 @@ public class HistoryModel implements Serializable{
 
 	@NotNull(message = "History Guid should not be null")
 	private String historyGuid;
-
-	@NotNull(message = "Order Guid should not be null")
-	private String orderGuid;
 
 	private String remarks;
 
@@ -38,14 +35,6 @@ public class HistoryModel implements Serializable{
 
 	public void setHistoryGuid(String historyGuid) {
 		this.historyGuid = historyGuid;
-	}
-
-	public String getOrderGuid() {
-		return orderGuid;
-	}
-
-	public void setOrderGuid(String orderGuid) {
-		this.orderGuid = orderGuid;
 	}
 
 	public String getRemarks() {
@@ -71,6 +60,5 @@ public class HistoryModel implements Serializable{
 	public void setUpdatedDate(Timestamp updatedDate) {
 		this.updatedDate = updatedDate;
 	}
-
 
 }

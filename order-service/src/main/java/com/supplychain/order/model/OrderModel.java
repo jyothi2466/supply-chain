@@ -15,7 +15,7 @@ public class OrderModel implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8777308582701613554L;
+	private static final long serialVersionUID = -7445938335410146548L;
 
 	@NotNull(message = "Order Guid should not be null")
 	private String orderGuid;
@@ -44,11 +44,13 @@ public class OrderModel implements Serializable {
 
 	@NotNull(message = "Number of days in transit should not be null")
 	private Integer transitDays;
-	
+
 	@NotNull(message = "Line Items should not be null")
 	private List<@Valid LineItemModel> lineItemModels;
 
 	private List<OrderStoreSupplierModel> orderStoreSupplierModels;
+
+	private List<HistoryModel> historyModels;
 
 	@NotNull(message = "Payment method should not be null")
 	private Integer paymentMethodId;
@@ -177,6 +179,14 @@ public class OrderModel implements Serializable {
 
 	public void setStatusId(Integer statusId) {
 		this.statusId = statusId;
+	}
+
+	public List<HistoryModel> getHistoryModels() {
+		return historyModels;
+	}
+
+	public void setHistoryModels(List<HistoryModel> historyModels) {
+		this.historyModels = historyModels;
 	}
 
 }

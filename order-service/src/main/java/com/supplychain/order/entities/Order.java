@@ -1,71 +1,84 @@
 package com.supplychain.order.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the orders database table.
  * 
  */
 @Entity
-@Table(name="orders",schema="order_schema")
-@NamedQuery(name="Order.findAll", query="SELECT o FROM Order o")
+@Table(name = "orders", schema = "order_schema")
+@NamedQuery(name = "Order.findAll", query = "SELECT o FROM Order o")
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="order_guid")
+	@Column(name = "order_guid")
 	private String orderGuid;
 
-	@Column(name="actual_delivery_date")
+	@Column(name = "actual_delivery_date")
 	private Timestamp actualDeliveryDate;
 
-	@Column(name="created_by")
+	@Column(name = "created_by")
 	private String createdBy;
 
-	@Column(name="created_date")
+	@Column(name = "created_date")
 	private Timestamp createdDate;
 
-	@Column(name="estimated_delivery_date")
+	@Column(name = "estimated_delivery_date")
 	private Timestamp estimatedDeliveryDate;
 
 	private String priority;
 
-	@Column(name="shipment_price")
+	@Column(name = "shipment_price")
 	private double shipmentPrice;
 
-	@Column(name="total_item_price")
+	@Column(name = "total_item_price")
 	private double totalItemPrice;
 
-	@Column(name="total_offer_price")
+	@Column(name = "total_offer_price")
 	private double totalOfferPrice;
 
-	@Column(name="total_order_price")
+	@Column(name = "total_order_price")
 	private double totalOrderPrice;
 
-	@Column(name="transit_days")
+	@Column(name = "transit_days")
 	private Integer transitDays;
 
-	//bi-directional many-to-one association to LineItem
-	@OneToMany(mappedBy="order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	// bi-directional many-to-one association to LineItem
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<LineItem> lineItems;
 
-	//bi-directional many-to-one association to OrderStoreSupplier
-	@OneToMany(mappedBy="order",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	// bi-directional many-to-one association to OrderStoreSupplier
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<OrderStoreSupplier> orderStoreSuppliers;
 
-	//uni-directional many-to-one association to PaymentMethod
+	// uni-directional many-to-one association to PaymentMethod
 	@ManyToOne
-	@JoinColumn(name="payment_method_id")
+	@JoinColumn(name = "payment_method_id")
 	private PaymentMethod paymentMethod;
 
-	//bi-directional many-to-one association to Status
+	// bi-directional many-to-one association to Status
 	@ManyToOne
-	@JoinColumn(name="status_id")
+	@JoinColumn(name = "status_id")
 	private Status status;
+
+	// bi-directional many-to-one association to OrderStoreSupplier
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<History> histories;
 
 	public Order() {
 	}
@@ -216,6 +229,14 @@ public class Order implements Serializable {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public List<History> getHistories() {
+		return histories;
+	}
+
+	public void setHistories(List<History> histories) {
+		this.histories = histories;
 	}
 
 }

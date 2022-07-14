@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
 
-import com.supplychain.order.entities.Order;
-
 public class OrderStoreSupplierModel implements Serializable {
 
 	/**
@@ -21,9 +19,6 @@ public class OrderStoreSupplierModel implements Serializable {
 
 	@NotNull(message = "Supplier code should not be null")
 	private String supplierCode;
-
-//	@NotNull(message = "Order should not be null")
-//	private Order order;
 
 	public OrderStoreSupplierModel() {
 	}
@@ -51,13 +46,5 @@ public class OrderStoreSupplierModel implements Serializable {
 	public void setSupplierCode(String supplierCode) {
 		this.supplierCode = supplierCode;
 	}
-
-//	public Order getOrder() {
-//		return order;
-//	}
-//
-//	public void setOrder(Order order) {
-//		this.order = order;
-//	}
 
 }
