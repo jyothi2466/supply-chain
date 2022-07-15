@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,13 @@ public class WarehouseController {
 	private WarehouseServiceImpl warehouseServiceImpl;
 
 	@PostMapping("/create")
-	public WarehouseModel createWarehouse(@Validated @RequestBody Optional<WarehouseModel> warehouseModel) {		
+	public WarehouseModel createWarehouse(@Validated @RequestBody Optional<WarehouseModel> warehouseModel) {
 		return warehouseServiceImpl.createWarehouse(warehouseModel);
+	}
+
+	@PutMapping("/update")
+	public WarehouseModel updateWarehouse(@Validated @RequestBody Optional<WarehouseModel> warehouseModel) {
+		return warehouseServiceImpl.updateWarehouse(warehouseModel);
+
 	}
 }

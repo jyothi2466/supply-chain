@@ -1,0 +1,20 @@
+package com.supplier.util;
+
+import java.util.Optional;
+
+import com.supplier.entity.Inventory;
+import com.supplier.mapper.InventoryMapper;
+import com.supplier.model.InventoryModel;
+
+public class InventoryUtil {
+
+	public static Inventory mapModelToInventory(Optional<InventoryModel> optionalInventoryModel,
+			InventoryMapper inventoryMapper) {
+
+		
+		
+		
+		return null;
+
+	}
+}

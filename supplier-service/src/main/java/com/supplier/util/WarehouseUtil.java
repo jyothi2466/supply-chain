@@ -34,6 +34,7 @@ public class WarehouseUtil {
 				.orElseThrow(() -> new SupplierNotFoundException("No Contact Information")).stream()
 				.map(contactModel -> mapModelToContact(contactModel, warehouseMapper, warehouse))
 				.collect(Collectors.toList());
+		
 		warehouse.setContacts(contactList);
 
 		Supplier supplier = new Supplier();
@@ -46,6 +47,7 @@ public class WarehouseUtil {
 
 	static public Contact mapModelToContact(ContactModel contactModel, WarehouseMapper warehouseMapper,
 			Warehouse warehouse) {
+		
 		contactModel.setContactGuid(UUID.randomUUID().toString());
 		contactModel.setContactTypeId(contactModel.getContactTypeId());
 		Contact contact = warehouseMapper.modelToContact(contactModel);
@@ -58,6 +60,7 @@ public class WarehouseUtil {
 
 	static public Location mapModelToLocation(Optional<WarehouseModel> optionalWarehouseModel,
 			WarehouseMapper warehouseMapper) {
+
 		Optional<Location> optionalLocation = optionalWarehouseModel.map(WarehouseModel::getLocationModel)
 				.map(locationModel -> warehouseMapper.modelToLocation(locationModel));
 
@@ -65,9 +68,11 @@ public class WarehouseUtil {
 		location.setLocationGuid(UUID.randomUUID().toString());
 
 		Optional<Address> optionalAddress = optionalWarehouseModel.map(WarehouseModel::getLocationModel)
-				.map(LocationModel::getAddressModel).map(address -> warehouseMapper.modelToAddress(address));
+
+				.map(LocationModel::getAddressModel).map(addressModel -> warehouseMapper.modelToAddress(addressModel));
 
 		Address address = optionalAddress.orElseThrow(() -> new RuntimeException("Address Details Not Found"));
+
 		address.setAddressGuid(UUID.randomUUID().toString());
 		location.setAddress(address);
 

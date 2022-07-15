@@ -1,0 +1,63 @@
+package com.supplier.util;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import com.supplier.entity.Inventory;
+import com.supplier.entity.Offer;
+import com.supplier.entity.StockLevel;
+import com.supplier.entity.WarehouseProduct;
+import com.supplier.exception.SupplierNotFoundException;
+import com.supplier.mapper.InventoryMapper;
+import com.supplier.model.InventoryModel;
+import com.supplier.model.WarehouseProductModel;
+
+public class InventoryUtil {
+
+	public static Inventory mapModelToInventory(Optional<InventoryModel> optionalInventoryModel,
+			InventoryMapper inventoryMapper) {
+
+		InventoryModel inventoryModel = optionalInventoryModel
+				.orElseThrow(() -> new SupplierNotFoundException(SupplierConstant.inventoryErrorMessage));
+
+		Inventory inventory = inventoryMapper.modelToInventory(inventoryModel);
+
+		inventory.setInventoryGuid(UUID.randomUUID().toString());
+		
+		return inventory;
+
+	}
+	
+	
+
+	public static WarehouseProduct mapModelToWarehouseProduct(Optional<InventoryModel> optionalInventoryModel,
+			InventoryMapper inventoryMapper) {
+
+		InventoryModel inventoryModel = optionalInventoryModel
+				.orElseThrow(() -> new SupplierNotFoundException(SupplierConstant.inventoryErrorMessage));
+
+		
+
+		WarehouseProduct warehouseProduct = optionalWarehouseProduct
+				.orElseThrow(() -> new RuntimeException("No WarehouseProduct Found"));
+
+		warehouseProduct.setWarehouseGuid(UUID.randomUUID().toString());
+
+		Optional<Offer> optionalOffer = optionalInventoryModel.map(InventoryModel::getWarehouseProductModels)
+				.map(WarehouseProductModel::getOfferModel).map(offerModel -> inventoryMapper.modelToOffer(offerModel));
+		Offer offer = optionalOffer.orElseThrow(() -> new RuntimeException("No offer found"));
+		offer.setOfferGuid(UUID.randomUUID().toString());
+
+		warehouseProduct.setOffer(offer);
+
+		Optional<StockLevel> optionalStockLevel = optionalInventoryModel.map(InventoryModel::getWarehouseProductModels)
+				.map(WarehouseProductModel::getStockLevelModel)
+				.map(stockLevelModel -> inventoryMapper.modelToStockLevel(stockLevelModel));
+		StockLevel stockLevel = optionalStockLevel.orElseThrow(() -> new RuntimeException("No Stock Level"));
+		stockLevel.setStockLevelGuid(UUID.randomUUID().toString());
+		warehouseProduct.setStockLevel(stockLevel);
+
+		return warehouseProduct;
+	}
+}

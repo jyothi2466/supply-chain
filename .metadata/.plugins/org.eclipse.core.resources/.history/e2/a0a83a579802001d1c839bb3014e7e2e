@@ -1,0 +1,32 @@
+package com.supplier.util;
+
+import java.util.Optional;
+import java.util.UUID;
+
+import com.supplier.entity.Inventory;
+import com.supplier.exception.SupplierNotFoundException;
+import com.supplier.mapper.InventoryMapper;
+import com.supplier.model.InventoryModel;
+
+public class InventoryUtil {
+
+	public static Inventory mapModelToInventory(Optional<InventoryModel> optionalInventoryModel,
+			InventoryMapper inventoryMapper) {
+
+		InventoryModel inventoryModel = optionalInventoryModel.orElseThrow(()
+				->new SupplierNotFoundException(SupplierConstant.inventoryErrorMessage));
+						
+		Inventory inventory =inventoryMapper.modelToInventory(inventoryModel);
+		
+		inventory.setInventoryGuid(UUID.randomUUID().toString());
+		
+		
+	public static WarehouseProduct mapModelToWarehouseProduct(Optional<WarehouseProductModel> optionalWarehouseProductModel,
+			InventoryMapper inventoryMapper) {
+		
+	}
+		return null;
+
+	}
+
+}

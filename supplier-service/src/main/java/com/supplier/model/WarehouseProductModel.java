@@ -2,7 +2,6 @@ package com.supplier.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 public class WarehouseProductModel implements Serializable {
 
@@ -29,11 +28,11 @@ public class WarehouseProductModel implements Serializable {
 
 	private String warehouseId;
 
-	private List<InventoryModel> inventoryModels;
+	private InventoryModel inventoryModel;
 
-	private List<OfferModel> offerModels;
+	private OfferModel offerModel;
 
-	private List<StockLevelModel> stockLevelModels;
+	private StockLevelModel stockLevelModel;
 
 	public WarehouseProductModel() {
 
@@ -111,28 +110,27 @@ public class WarehouseProductModel implements Serializable {
 		this.wpGuid = wpGuid;
 	}
 
-	public List<InventoryModel> getInventoryModels() {
-		return inventoryModels;
+	public InventoryModel getInventoryModel() {
+		return inventoryModel;
 	}
 
-	public void setInventoryModels(List<InventoryModel> inventoryModels) {
-		this.inventoryModels = inventoryModels;
+	public void setInventoryModel(InventoryModel inventoryModel) {
+		this.inventoryModel = inventoryModel;
 	}
 
-	public List<OfferModel> getOfferModels() {
-		return offerModels;
+	public OfferModel getOfferModel() {
+		return offerModel;
 	}
 
-	public void setOfferModels(List<OfferModel> offerModels) {
-		this.offerModels = offerModels;
+	public void setOfferModel(OfferModel offerModel) {
+		this.offerModel = offerModel;
 	}
 
-	public List<StockLevelModel> getStockLevelModels() {
-		return stockLevelModels;
+	public StockLevelModel getStockLevelModel() {
+		return stockLevelModel;
 	}
 
-	public void setStockLevelModels(List<StockLevelModel> stockLevelModels) {
-		this.stockLevelModels = stockLevelModels;
+	public void setStockLevelModel(StockLevelModel stockLevelModel) {
+		this.stockLevelModel = stockLevelModel;
 	}
-
 }

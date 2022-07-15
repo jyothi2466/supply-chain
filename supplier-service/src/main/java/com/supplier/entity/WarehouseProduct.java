@@ -4,11 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,7 +22,7 @@ import javax.persistence.TemporalType;
  * 
  */
 @Entity
-@Table(name="warehouse_product",schema="supplier_schema")
+@Table(name = "warehouse_product", schema = "supplier_schema")
 @NamedQuery(name = "WarehouseProduct.findAll", query = "SELECT w FROM WarehouseProduct w")
 public class WarehouseProduct implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -50,21 +54,25 @@ public class WarehouseProduct implements Serializable {
 	@Column(name = "update_date")
 	private Date updateDate;
 
-	@Column(name = "warehouse_guid")
-	private String warehouseGuid;
+	@OneToOne
+	@JoinColumn(name = "warehouse_guid")
+	private Warehouse warehouse;
 
 	// bi-directional many-to-one association to Inventory
-	@OneToMany(mappedBy = "warehouseProduct")
-	private List<Inventory> inventories;
+	@ManyToOne
+	@JoinColumn(name = "inventory_guid")
+	private Inventory inventory;
 
 	// bi-directional many-to-one association to Offer
-	@OneToMany(mappedBy = "warehouseProduct")
-	private List<Offer> offers;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "offer_guid")
+	private Offer offer;
 
-	// bi-directional many-to-one association to StockLevel
+	// bi-directional one-to-one association to StockLevel
 	@SuppressWarnings("rawtypes")
-	@OneToMany(mappedBy = "warehouseProduct")	
-	private List<StockLevel> stockLevels;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "stock_level_guid")
+	private StockLevel stockLevel;
 
 	public WarehouseProduct() {
 	}
@@ -133,79 +141,36 @@ public class WarehouseProduct implements Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public String getWarehouseGuid() {
-		return this.warehouseGuid;
+	public Warehouse getWarehouse() {
+		return warehouse;
 	}
 
-	public void setWarehouseGuid(String warehouseGuid) {
-		this.warehouseGuid = warehouseGuid;
+	public void setWarehouse(Warehouse warehouse) {
+		this.warehouse = warehouse;
 	}
 
-	public List<Inventory> getInventories() {
-		return this.inventories;
-	}
-
-	public void setInventories(List<Inventory> inventories) {
-		this.inventories = inventories;
-	}
-
-	public Inventory addInventory(Inventory inventory) {
-		getInventories().add(inventory);
-		inventory.setWarehouseProduct(this);
-
+	public Inventory getInventory() {
 		return inventory;
 	}
 
-	public Inventory removeInventory(Inventory inventory) {
-		getInventories().remove(inventory);
-		inventory.setWarehouseProduct(null);
-
-		return inventory;
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
 	}
 
-	public List<Offer> getOffers() {
-		return this.offers;
-	}
-
-	public void setOffers(List<Offer> offers) {
-		this.offers = offers;
-	}
-
-	public Offer addOffer(Offer offer) {
-		getOffers().add(offer);
-		offer.setWarehouseProduct(this);
-
+	public Offer getOffer() {
 		return offer;
 	}
 
-	public Offer removeOffer(Offer offer) {
-		getOffers().remove(offer);
-		offer.setWarehouseProduct(null);
-
-		return offer;
+	public void setOffer(Offer offer) {
+		this.offer = offer;
 	}
 
-	@SuppressWarnings("rawtypes")
-	public List<StockLevel> getStockLevels() {
-		return this.stockLevels;
-	}
-
-	public void setStockLevels(@SuppressWarnings("rawtypes") List<StockLevel> stockLevels) {
-		this.stockLevels = stockLevels;
-	}
-
-	public StockLevel<?> addStockLevel(StockLevel<?> stockLevel) {
-		getStockLevels().add(stockLevel);
-		stockLevel.setWarehouseProduct(this);
-
+	public StockLevel getStockLevel() {
 		return stockLevel;
 	}
 
-	public StockLevel<?> removeStockLevel(StockLevel<?> stockLevel) {
-		getStockLevels().remove(stockLevel);
-		stockLevel.setWarehouseProduct(null);
-
-		return stockLevel;
+	public void setStockLevel(StockLevel stockLevel) {
+		this.stockLevel = stockLevel;
 	}
 
 }

@@ -2,12 +2,14 @@ package com.supplier.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -15,7 +17,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="stock_level",schema="supplier_schema")
+@Table(name = "stock_level", schema = "supplier_schema")
 @NamedQuery(name = "StockLevel.findAll", query = "SELECT s FROM StockLevel s")
 public class StockLevel<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -33,8 +35,8 @@ public class StockLevel<T> implements Serializable {
 	@Column(name = "reorder_stock")
 	private Long reorderStock;
 
-	// bi-directional many-to-one association to WarehouseProduct
-	@ManyToOne
+	// uni-directional many-to-one association to WarehouseProduct
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "wp_guid")
 	private WarehouseProduct warehouseProduct;
 

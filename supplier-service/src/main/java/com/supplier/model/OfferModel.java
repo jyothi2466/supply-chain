@@ -14,7 +14,7 @@ public class OfferModel implements Serializable {
 
 	private Date endDate;
 
-	private String offerId;
+	private String offerGuid;
 
 	private Integer percentage;
 
@@ -42,12 +42,12 @@ public class OfferModel implements Serializable {
 		this.endDate = endDate;
 	}
 
-	public String getOfferId() {
-		return offerId;
+	public String getOfferGuid() {
+		return offerGuid;
 	}
 
-	public void setOfferId(String offerId) {
-		this.offerId = offerId;
+	public void setOfferGuid(String offerGuid) {
+		this.offerGuid = offerGuid;
 	}
 
 	public Integer getPercentage() {

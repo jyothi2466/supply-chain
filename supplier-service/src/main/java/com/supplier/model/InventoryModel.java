@@ -2,6 +2,7 @@ package com.supplier.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class InventoryModel implements Serializable {
 
@@ -20,7 +21,7 @@ public class InventoryModel implements Serializable {
 
 	private Integer totalUnits;
 
-	private WarehouseProductModel warehouseProductModel;
+	private List<WarehouseProductModel> warehouseProductModels;
 
 	public InventoryModel() {
 
@@ -66,12 +67,12 @@ public class InventoryModel implements Serializable {
 		this.totalUnits = totalUnits;
 	}
 
-	public WarehouseProductModel getWarehouseProductModel() {
-		return warehouseProductModel;
+	public List<WarehouseProductModel> getWarehouseProductModels() {
+		return warehouseProductModels;
 	}
 
-	public void setWarehouseProductModel(WarehouseProductModel warehouseProductModel) {
-		this.warehouseProductModel = warehouseProductModel;
+	public void setWarehouseProductModels(List<WarehouseProductModel> warehouseProductModels) {
+		this.warehouseProductModels = warehouseProductModels;
 	}
 
 }

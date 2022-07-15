@@ -1,0 +1,5 @@
+package com.supplier.util;
+
+public class InventoryConstant {
+
+}
