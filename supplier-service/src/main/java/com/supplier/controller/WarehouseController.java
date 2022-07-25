@@ -7,6 +7,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/supplier/warehouse/v1")
 public class WarehouseController {
 	
-	
-
 }
